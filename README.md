@@ -22,7 +22,7 @@ $ npm install -g event-listener
 $ event-listener COMMAND
 running command...
 $ event-listener (-v|--version|version)
-event-listener/0.0.0 darwin-x64 node-v9.4.0
+event-listener/0.0.0 darwin-x64 node-v10.10.0
 $ event-listener --help [COMMAND]
 USAGE
   $ event-listener COMMAND
@@ -30,26 +30,25 @@ USAGE
 ```
 <!-- usagestop -->
 <!-- commands -->
-* [`event-listener events:tail [EVENTNAME]`](#event-listener-eventstail-eventname)
+* [`event-listener events:listen [EVENTNAME]`](#event-listener-eventslisten-eventname)
 
-## `event-listener events:tail [EVENTNAME]`
+## `event-listener events:listen [EVENTNAME]`
 
 A plugin to retrieve and monitor platform events created by the Hashtag Listener(s)
 
 ```
 USAGE
-  $ event-listener events:tail [EVENTNAME]
+  $ event-listener events:listen [EVENTNAME]
 
 OPTIONS
-  -f, --force                                     Monitor events live until the command is exited
-  -n, --number=number                             Retrieve the last n number of events
+  -r, --replayid=replayid                         [default: 20] Retrieve the last n number of events
   -u, --targetusername=targetusername             username or alias for the target org; overrides default target org
   --apiversion=apiversion                         override the api version used for api requests made by this command
   --json                                          format output as json
   --loglevel=(trace|debug|info|warn|error|fatal)  logging level for this command invocation
 ```
 
-_See code: [src/commands/events/tail.ts](https://github.com/amphro/event-listener/blob/v0.0.0/src/commands/events/tail.ts)_
+_See code: [src/commands/events/listen.ts](https://github.com/amphro/event-listener/blob/v0.0.0/src/commands/events/listen.ts)_
 <!-- commandsstop -->
 <!-- debugging-your-plugin -->
 # Debugging your plugin
