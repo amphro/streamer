@@ -40,6 +40,7 @@ export default class EventTail extends SfdxCommand {
   }
 
   private async steamEvent() {
+    const channel = this.args.eventName;
     this.ux.log(this.org.getConnection().getApiVersion());
     const streamProcessor = (message: JsonMap): StatusResult<string> => {
         console.log(message);
@@ -56,34 +57,39 @@ export default class EventTail extends SfdxCommand {
         }
 
         return {
-            completed: !this.flags.force,
-            payload: ensureString(rawPayload['Message__c'])
+            completed: false,
+            payload: ensureString(rawPayload.Message__c)
         };
     };
 
     const options: StreamingOptions<string> =
         new DefaultStreamingOptions(
             this.org,
-            this.args.eventName,
+            channel,
             streamProcessor);
 
     const asyncStatusClient: StreamingClient<string> = await StreamingClient.init(options);
-    await asyncStatusClient.handshake();
-    this.ux.log('Handshake successful');
+    
     if (this.flags.number) {
         asyncStatusClient['cometClient'].addExtension({
-            outgoing: message => {
+
+            outgoing: (message, callback) => {
                 if (message.channel === '/meta/subscribe') {
                     if (!message.ext) { message.ext = {}; }
                     const replayFromMap = {};
-                    replayFromMap[this.args.eventName] = -2;
+                    replayFromMap[channel] = 26;
                     // add "ext : { "replay" : { CHANNEL : REPLAY_VALUE }}" to subscribe message
                     message.ext['replay'] = replayFromMap;
                 }
+
+                console.log(message);
+                callback(message);
             }
         });
     }
-    await asyncStatusClient.subscribe();
+    await asyncStatusClient.handshake();
+    this.ux.log('Handshake successful');
+    await asyncStatusClient.subscribe(async () => {});
     this.ux.log('Listening...');
   }
 }
