@@ -1,5 +1,5 @@
 import {core, flags, SfdxCommand} from '@salesforce/command';
-import { DefaultStreamingOptions, SfdxError, StatusResult, StreamingClient, StreamingOptions, CometClient } from '@salesforce/core';
+import { DefaultStreamingOptions, StatusResult, StreamingClient, StreamingOptions } from '@salesforce/core';
 import {AnyJson, ensureJsonMap, ensureString, JsonMap} from '@salesforce/ts-types';
 
 // Initialize Messages with the current plugin directory
@@ -51,10 +51,9 @@ export default class EventTail extends SfdxCommand {
 //     Message__c: '#SalesforceDX stuff' },
 //  event: { replayId: 26 } }
         const rawPayload = ensureJsonMap(message.payload);
-        if (!rawPayload['Message__c']) {
-            throw new SfdxError('Not found.', 'NotFound');
+        if (rawPayload.Message__c) {
+            this.ux.log(rawPayload.Message__c);
         }
-        this.ux.log(rawPayload);
 
         return {
             completed: !this.flags.force,
@@ -68,22 +67,23 @@ export default class EventTail extends SfdxCommand {
             this.args.eventName,
             streamProcessor);
 
-    try {
-        const asyncStatusClient: StreamingClient<string> = await StreamingClient.init(options);
-        await asyncStatusClient.handshake();
-        this.ux.log('Handshake successful');
-        if (this.flags.number) {
-            // do something with replay ids
-            // CometClient
-            // cometdReplayExtension https://github.com/developerforce/StreamingReplayClientExtensions/blob/master/javascript/cometdReplayExtension.js
-        }
-        await asyncStatusClient.subscribe(async () => {
-            this.ux.log('Before sub');
+    const asyncStatusClient: StreamingClient<string> = await StreamingClient.init(options);
+    await asyncStatusClient.handshake();
+    this.ux.log('Handshake successful');
+    if (this.flags.number) {
+        asyncStatusClient['cometClient'].addExtension({
+            outgoing: message => {
+                if (message.channel === '/meta/subscribe') {
+                    if (!message.ext) { message.ext = {}; }
+                    const replayFromMap = {};
+                    replayFromMap[this.args.eventName] = -2;
+                    // add "ext : { "replay" : { CHANNEL : REPLAY_VALUE }}" to subscribe message
+                    message.ext['replay'] = replayFromMap;
+                }
+            }
         });
-        this.ux.log('After sub successful');
-    } catch (e) {
-        this.ux.error(e);
-        throw e;
     }
+    await asyncStatusClient.subscribe();
+    this.ux.log('Listening...');
   }
 }
