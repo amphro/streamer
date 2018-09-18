@@ -22,7 +22,7 @@ $ npm install -g event-listener
 $ event-listener COMMAND
 running command...
 $ event-listener (-v|--version|version)
-event-listener/0.0.0 darwin-x64 node-v10.10.0
+event-listener/0.0.0 darwin-x64 node-v9.4.0
 $ event-listener --help [COMMAND]
 USAGE
   $ event-listener COMMAND

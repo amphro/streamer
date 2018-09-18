@@ -9,7 +9,7 @@ core.Messages.importMessagesDirectory(__dirname);
 // or any library that is using the messages framework can also be loaded this way.
 const messages = core.Messages.loadMessages('event-listener', 'events');
 
-export default class EventTail extends SfdxCommand {
+export class EventTail extends SfdxCommand {
 
   public static description = messages.getMessage('tail.commandDescription');
 
@@ -32,6 +32,16 @@ export default class EventTail extends SfdxCommand {
     return { };
   }
 
+  public async getClient(channel, streamProcessor) {
+    const options: StreamingOptions<string> =
+        new DefaultStreamingOptions(
+            this.org,
+            channel,
+            streamProcessor);
+
+    return await StreamingClient.init(options);
+  }
+
   private async steamEvent() {
     const channel = this.args.eventName;
     this.ux.log(this.org.getConnection().getApiVersion());
@@ -43,17 +53,11 @@ export default class EventTail extends SfdxCommand {
         return { completed: false };
     };
 
-    const options: StreamingOptions<string> =
-        new DefaultStreamingOptions(
-            this.org,
-            channel,
-            streamProcessor);
+    const asyncStatusClient: StreamingClient<string> = await this.getClient(channel, streamProcessor);
 
-    const asyncStatusClient: StreamingClient<string> = await StreamingClient.init(options);
-
-    if (this.flags.replayid > 0) {
-        asyncStatusClient.replay(this.flags.replayid);
-    }
+    // if (this.flags.replayid > 0) {
+    //     asyncStatusClient.replay(this.flags.replayid);
+    // }
     await asyncStatusClient.handshake();
     this.ux.log('Listening...');
     await asyncStatusClient.subscribe(async () => {});
