@@ -18,38 +18,38 @@ Listen to platform events
 <!-- install -->
 <!-- usage -->
 ```sh-session
-$ npm install -g platformevents
-$ platformevents COMMAND
+$ npm install -g event-listener
+$ event-listener COMMAND
 running command...
-$ platformevents (-v|--version|version)
-platformevents/0.0.0 darwin-x64 node-v8.9.4
-$ platformevents --help [COMMAND]
+$ event-listener (-v|--version|version)
+event-listener/0.0.0 darwin-x64 node-v9.11.1
+$ event-listener --help [COMMAND]
 USAGE
-  $ platformevents COMMAND
+  $ event-listener COMMAND
 ...
 ```
 <!-- usagestop -->
 <!-- commands -->
-* [`platformevents events:tail [EVENTNAME]`](#platformevents-eventstail-eventname)
+* [`event-listener events:tail [EVENTNAME]`](#event-listener-eventstail-eventname)
 
-## `platformevents events:tail [EVENTNAME]`
+## `event-listener events:tail [EVENTNAME]`
 
-Prints a greeting and your org id(s)!
+A plugin to retrieve and monitor platform events created by the Hashtag Listener(s)
 
 ```
 USAGE
-  $ platformevents events:tail [EVENTNAME]
+  $ event-listener events:tail [EVENTNAME]
 
 OPTIONS
-  -f, --force=force                               example boolean flag
-  -n, --number                                    name to print
+  -f, --force                                     Monitor events live until the command is exited
+  -n, --number=number                             Retrieve the last n number of events
   -u, --targetusername=targetusername             username or alias for the target org; overrides default target org
   --apiversion=apiversion                         override the api version used for api requests made by this command
   --json                                          format output as json
   --loglevel=(trace|debug|info|warn|error|fatal)  logging level for this command invocation
 ```
 
-_See code: [src/commands/events/tail.ts](https://github.com/amphro/platformevents/blob/v0.0.0/src/commands/events/tail.ts)_
+_See code: [src/commands/events/tail.ts](https://github.com/amphro/event-listener/blob/v0.0.0/src/commands/events/tail.ts)_
 <!-- commandsstop -->
 <!-- debugging-your-plugin -->
 # Debugging your plugin
