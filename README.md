@@ -18,37 +18,40 @@ Listen to platform events
 <!-- install -->
 <!-- usage -->
 ```sh-session
-$ npm install -g event-listener
-$ event-listener COMMAND
+$ npm install -g @amphro/streamer
+$ @amphro/streamer COMMAND
 running command...
-$ event-listener (-v|--version|version)
-event-listener/0.0.0 darwin-x64 node-v9.4.0
-$ event-listener --help [COMMAND]
+$ @amphro/streamer (-v|--version|version)
+@amphro/streamer/0.0.0 darwin-x64 node-v8.9.4
+$ @amphro/streamer --help [COMMAND]
 USAGE
-  $ event-listener COMMAND
+  $ @amphro/streamer COMMAND
 ...
 ```
 <!-- usagestop -->
 <!-- commands -->
-* [`event-listener events:listen [EVENTNAME]`](#event-listener-eventslisten-eventname)
+* [`@amphro/streamer channel:stream [CHANNEL]`](#amphro-streamer-channelstream-channel)
 
-## `event-listener events:listen [EVENTNAME]`
+## `@amphro/streamer channel:stream [CHANNEL]`
 
 A plugin to retrieve and monitor platform events created by the Hashtag Listener(s)
 
 ```
 USAGE
-  $ event-listener events:listen [EVENTNAME]
+  $ @amphro/streamer channel:stream [CHANNEL]
 
 OPTIONS
-  -r, --replayid=replayid                         [default: 20] Retrieve the last n number of events
+  -r, --replayid=replayid                         [default: 20] A replayId to replay events from
   -u, --targetusername=targetusername             username or alias for the target org; overrides default target org
   --apiversion=apiversion                         override the api version used for api requests made by this command
   --json                                          format output as json
   --loglevel=(trace|debug|info|warn|error|fatal)  logging level for this command invocation
+
+EXAMPLE
+  sfdx channel:stream /event/MyEvent__e -u de -r 20
 ```
 
-_See code: [src/commands/events/listen.ts](https://github.com/amphro/event-listener/blob/v0.0.0/src/commands/events/listen.ts)_
+_See code: [src/commands/channel/stream.ts](https://github.com/amphro/streamer/blob/v0.0.0/src/commands/channel/stream.ts)_
 <!-- commandsstop -->
 <!-- debugging-your-plugin -->
 # Debugging your plugin

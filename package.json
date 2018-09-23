@@ -1,9 +1,9 @@
 {
-  "name": "event-listener",
-  "description": "Listen to platform or streaming events",
+  "name": "@amphro/streamer",
+  "description": "Stream to platform or streaming events to the console via a channel",
   "version": "0.0.0",
   "author": "Thomas @amphro",
-  "bugs": "https://github.com/amphro/event-listener/issues",
+  "bugs": "https://github.com/amphro/streamer/issues",
   "dependencies": {
     "@oclif/command": "1",
     "@oclif/config": "1",
@@ -38,23 +38,25 @@
     "/npm-shrinkwrap.json",
     "/oclif.manifest.json"
   ],
-  "homepage": "https://github.com/amphro/event-listener",
+  "homepage": "https://github.com/amphro/streamer",
   "keywords": [
-    "sfdx-plugin"
+    "sfdx-plugin",
+    "platform events",
+    "streaming api"
   ],
   "license": "MIT",
   "oclif": {
     "commands": "./lib/commands",
     "topics": {
-      "hello": {
-        "description": "Commands to say hello."
+      "channel": {
+        "description": "stream platform or streaming events to the console via a channel"
       }
     },
     "devPlugins": [
       "@oclif/plugin-help"
     ]
   },
-  "repository": "amphro/event-listener",
+  "repository": "amphro/streamer",
   "scripts": {
     "postpack": "rm -f oclif.manifest.json npm-shrinkwrap.json",
     "posttest": "tsc -p test --noEmit && tslint -p test -t stylish",

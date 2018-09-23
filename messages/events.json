@@ -1,8 +1,0 @@
-{
-  "tail": {
-    "commandDescription": "A plugin to retrieve and monitor platform events created by the Hashtag Listener(s)",
-    "numberFlagDescription": "Retrieve the last n number of events",
-    "forceFlagDescription": "Monitor events live until the command is exited",
-    "errorNoOrgResults": "No results found for the organization '%s'."
-  }
-}

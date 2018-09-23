@@ -1,0 +1,7 @@
+{
+  "stream": {
+    "commandDescription": "A plugin to retrieve and monitor platform events created by the Hashtag Listener(s)",
+    "replayIdFlagDescription": "A replayId to replay events from",
+    "example1": "sfdx channel:stream /event/MyEvent__e -u de -r 20"
+  }
+}

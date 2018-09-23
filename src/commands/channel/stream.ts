@@ -1,5 +1,5 @@
 import {core, flags, SfdxCommand} from '@salesforce/command';
-import { DefaultStreamingOptions, StatusResult, StreamingClient, StreamingOptions } from '@salesforce/core';
+import { DefaultStreamingOptions, StatusResult, StreamingClient } from '@salesforce/core';
 import {AnyJson, ensureJsonMap, JsonMap} from '@salesforce/ts-types';
 
 // Initialize Messages with the current plugin directory
@@ -7,38 +7,29 @@ core.Messages.importMessagesDirectory(__dirname);
 
 // Load the specific messages for this file. Messages from @salesforce/command, @salesforce/core,
 // or any library that is using the messages framework can also be loaded this way.
-const messages = core.Messages.loadMessages('event-listener', 'events');
+const messages = core.Messages.loadMessages('@amphro/streamer', 'channel');
 
 export class EventTail extends SfdxCommand {
 
-  public static description = messages.getMessage('tail.commandDescription');
+  public static description = messages.getMessage('stream.commandDescription');
 
-  public static examples = [
+  public static examples = [messages.getMessage('stream.example1')];
 
-  ];
-
-  public static args = [{name: 'eventName', require}];
+  public static args = [{name: 'channel', require}];
 
   protected static flagsConfig = {
-    replayid: flags.integer({char: 'r', description: messages.getMessage('tail.numberFlagDescription'), default: 20})
+    replayid: flags.integer({char: 'r', description: messages.getMessage('stream.replayIdFlagDescription'), default: 20})
   };
 
-  // Comment this out if your command does not require an org username
   protected static requiresUsername = true;
 
   public async run(): Promise<AnyJson> {
     await this.steamEvent();
-
-    return { };
+    return {};
   }
 
   public async getClient(channel, streamProcessor) {
-    const options: StreamingOptions<string> =
-        new DefaultStreamingOptions(
-            this.org,
-            channel,
-            streamProcessor);
-
+    const options = new DefaultStreamingOptions(this.org, channel, streamProcessor);
     return await StreamingClient.init(options);
   }
 
@@ -53,13 +44,14 @@ export class EventTail extends SfdxCommand {
         return { completed: false };
     };
 
-    const asyncStatusClient: StreamingClient<string> = await this.getClient(channel, streamProcessor);
+    const asyncStatusClient = await this.getClient(channel, streamProcessor);
 
-    // if (this.flags.replayid > 0) {
-    //     asyncStatusClient.replay(this.flags.replayid);
-    // }
+    if (this.flags.replayid > 0) {
+        asyncStatusClient.replay(this.flags.replayid);
+    }
+
     await asyncStatusClient.handshake();
-    this.ux.log('Listening...');
+    this.ux.log('Listening... (ctrl-c to exit)');
     await asyncStatusClient.subscribe(async () => {});
   }
 }
