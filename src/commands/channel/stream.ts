@@ -1,6 +1,6 @@
 import {core, flags, SfdxCommand} from '@salesforce/command';
 import { DefaultStreamingOptions, StatusResult, StreamingClient } from '@salesforce/core';
-import {AnyJson, ensureJsonMap, JsonMap} from '@salesforce/ts-types';
+import {AnyJson, isNumber, JsonMap} from '@salesforce/ts-types';
 
 // Initialize Messages with the current plugin directory
 core.Messages.importMessagesDirectory(__dirname);
@@ -9,7 +9,7 @@ core.Messages.importMessagesDirectory(__dirname);
 // or any library that is using the messages framework can also be loaded this way.
 const messages = core.Messages.loadMessages('@amphro/streamer', 'channel');
 
-export class EventTail extends SfdxCommand {
+export class Streamer extends SfdxCommand {
 
   public static description = messages.getMessage('stream.commandDescription');
 
@@ -18,7 +18,7 @@ export class EventTail extends SfdxCommand {
   public static args = [{name: 'channel', require}];
 
   protected static flagsConfig = {
-    replayid: flags.integer({char: 'r', description: messages.getMessage('stream.replayIdFlagDescription'), default: 20})
+    replayid: flags.integer({char: 'r', description: messages.getMessage('stream.replayIdFlagDescription')})
   };
 
   protected static requiresUsername = true;
@@ -28,25 +28,15 @@ export class EventTail extends SfdxCommand {
     return {};
   }
 
-  public async getClient(channel, streamProcessor) {
-    const options = new DefaultStreamingOptions(this.org, channel, streamProcessor);
+  public async getClient() {
+    const options = new DefaultStreamingOptions(this.org, this.args.channel, this.streamProcessor.bind(this));
     return await StreamingClient.init(options);
   }
 
   private async steamEvent() {
-    const channel = this.args.eventName;
-    this.ux.log(this.org.getConnection().getApiVersion());
+    const asyncStatusClient = await this.getClient();
 
-    const streamProcessor = (message: JsonMap): StatusResult<string> => {
-        const event = ensureJsonMap(message.event);
-        const payload = ensureJsonMap(message.payload);
-        this.ux.log(`${event.replayId}: ${payload.Message__c}`);
-        return { completed: false };
-    };
-
-    const asyncStatusClient = await this.getClient(channel, streamProcessor);
-
-    if (this.flags.replayid > 0) {
+    if (isNumber(this.flags.replayid)) {
         asyncStatusClient.replay(this.flags.replayid);
     }
 
@@ -54,4 +44,9 @@ export class EventTail extends SfdxCommand {
     this.ux.log('Listening... (ctrl-c to exit)');
     await asyncStatusClient.subscribe(async () => {});
   }
+
+  private streamProcessor = (message: JsonMap): StatusResult<string> => {
+    this.ux.logJson(message);
+    return { completed: false };
+  };
 }

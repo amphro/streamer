@@ -1,16 +1,10 @@
-platformevents
+streamer
 ==============
 
-Listen to platform events
+Stream platform or streaming events to the console via a channel.
 
-[![Version](https://img.shields.io/npm/v/platformevents.svg)](https://npmjs.org/package/platformevents)
 [![CircleCI](https://circleci.com/gh/amphro/platformevents/tree/master.svg?style=shield)](https://circleci.com/gh/amphro/platformevents/tree/master)
-[![Appveyor CI](https://ci.appveyor.com/api/projects/status/github/amphro/platformevents?branch=master&svg=true)](https://ci.appveyor.com/project/heroku/platformevents/branch/master)
-[![Codecov](https://codecov.io/gh/amphro/platformevents/branch/master/graph/badge.svg)](https://codecov.io/gh/amphro/platformevents)
-[![Greenkeeper](https://badges.greenkeeper.io/amphro/platformevents.svg)](https://greenkeeper.io/)
-[![Known Vulnerabilities](https://snyk.io/test/github/amphro/platformevents/badge.svg)](https://snyk.io/test/github/amphro/platformevents)
 [![Downloads/week](https://img.shields.io/npm/dw/platformevents.svg)](https://npmjs.org/package/platformevents)
-[![License](https://img.shields.io/npm/l/platformevents.svg)](https://github.com/amphro/platformevents/blob/master/package.json)
 
 <!-- toc -->
 * [Debugging your plugin](#debugging-your-plugin)
@@ -22,7 +16,7 @@ $ npm install -g @amphro/streamer
 $ @amphro/streamer COMMAND
 running command...
 $ @amphro/streamer (-v|--version|version)
-@amphro/streamer/0.0.0 darwin-x64 node-v8.9.4
+@amphro/streamer/0.0.0 darwin-x64 node-v10.10.0
 $ @amphro/streamer --help [COMMAND]
 USAGE
   $ @amphro/streamer COMMAND
@@ -34,14 +28,14 @@ USAGE
 
 ## `@amphro/streamer channel:stream [CHANNEL]`
 
-A plugin to retrieve and monitor platform events created by the Hashtag Listener(s)
+stream platform or streaming events to the console via a channel
 
 ```
 USAGE
   $ @amphro/streamer channel:stream [CHANNEL]
 
 OPTIONS
-  -r, --replayid=replayid                         [default: 20] A replayId to replay events from
+  -r, --replayid=replayid                         a replayId to replay events from
   -u, --targetusername=targetusername             username or alias for the target org; overrides default target org
   --apiversion=apiversion                         override the api version used for api requests made by this command
   --json                                          format output as json

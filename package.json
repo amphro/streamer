@@ -1,6 +1,6 @@
 {
   "name": "@amphro/streamer",
-  "description": "Stream to platform or streaming events to the console via a channel",
+  "description": "Stream platform or streaming events to the console via a channel",
   "version": "0.0.0",
   "author": "Thomas @amphro",
   "bugs": "https://github.com/amphro/streamer/issues",
