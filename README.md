@@ -10,29 +10,25 @@ Stream platform or streaming events to the console via a channel.
 * [Debugging your plugin](#debugging-your-plugin)
 <!-- tocstop -->
 <!-- install -->
-<!-- usage -->
 ```sh-session
-$ npm install -g @amphro/streamer
-$ @amphro/streamer COMMAND
+$ sfdx plugin:install @amphro/streamer
+$ sfdx COMMAND
 running command...
-$ @amphro/streamer (-v|--version|version)
-@amphro/streamer/0.0.0 darwin-x64 node-v10.10.0
-$ @amphro/streamer --help [COMMAND]
+$ sfdx channel --help
 USAGE
-  $ @amphro/streamer COMMAND
+  $ sfdx COMMAND
 ...
 ```
-<!-- usagestop -->
 <!-- commands -->
-* [`@amphro/streamer channel:stream [CHANNEL]`](#amphro-streamer-channelstream-channel)
+* [`sfdx channel:stream [CHANNEL]`](#sfdx-channelstream-channel)
 
-## `@amphro/streamer channel:stream [CHANNEL]`
+## `sfdx channel:stream [CHANNEL]`
 
 stream platform or streaming events to the console via a channel
 
 ```
 USAGE
-  $ @amphro/streamer channel:stream [CHANNEL]
+  $ sfdx channel:stream [CHANNEL]
 
 OPTIONS
   -r, --replayid=replayid                         a replayId to replay events from

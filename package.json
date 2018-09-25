@@ -46,6 +46,7 @@
   ],
   "license": "MIT",
   "oclif": {
+    "bin": "sfdx",
     "commands": "./lib/commands",
     "topics": {
       "channel": {
