@@ -7,6 +7,7 @@ Stream platform or streaming events to the console via a channel.
 [![Downloads/week](https://img.shields.io/npm/dw/@amphro/streamer.svg)](https://npmjs.org/package/@amphro/streamer)
 
 <!-- toc -->
+
 <!-- tocstop -->
 <!-- install -->
 ```sh-session
@@ -40,5 +41,5 @@ EXAMPLE
   sfdx channel:stream /event/MyEvent__e -u de -r 20
 ```
 
-_See code: [src/commands/channel/stream.ts](https://github.com/amphro/streamer/blob/v0.1.0/src/commands/channel/stream.ts)_
+_See code: [src/commands/channel/stream.ts](https://github.com/amphro/streamer/blob/v1.0.0/src/commands/channel/stream.ts)_
 <!-- commandsstop -->

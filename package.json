@@ -1,7 +1,7 @@
 {
   "name": "@amphro/streamer",
   "description": "Stream platform or streaming events to the console via a channel",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "author": "Thomas @amphro",
   "bugs": "https://github.com/amphro/streamer/issues",
   "dependencies": {
