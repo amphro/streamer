@@ -1,5 +1,5 @@
 import {core, flags, SfdxCommand} from '@salesforce/command';
-import { DefaultStreamingOptions, StatusResult, StreamingClient } from '@salesforce/core';
+import { DefaultStreamingOptions, StatusResult, StreamingClient, Time, TIME_UNIT } from '@salesforce/core';
 import {AnyJson, isNumber, JsonMap} from '@salesforce/ts-types';
 
 // Initialize Messages with the current plugin directory
@@ -30,6 +30,8 @@ export class Streamer extends SfdxCommand {
 
   public async getClient() {
     const options = new DefaultStreamingOptions(this.org, this.args.channel, this.streamProcessor.bind(this));
+    const time = new Time(30, TIME_UNIT.MINUTES);
+    options.setSubscribeTimeout(time);
     return await StreamingClient.init(options);
   }
 

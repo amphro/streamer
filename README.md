@@ -3,8 +3,8 @@ streamer
 
 Stream platform or streaming events to the console via a channel.
 
-[![CircleCI](https://circleci.com/gh/amphro/platformevents/tree/master.svg?style=shield)](https://circleci.com/gh/amphro/platformevents/tree/master)
-[![Downloads/week](https://img.shields.io/npm/dw/platformevents.svg)](https://npmjs.org/package/platformevents)
+[![CircleCI](https://circleci.com/gh/amphro/streamer/tree/master.svg?style=shield)](https://circleci.com/gh/amphro/streamer/tree/master)
+[![Downloads/week](https://img.shields.io/npm/dw/@amphro/streamer.svg)](https://npmjs.org/package/@amphro/streamer)
 
 <!-- toc -->
 * [Debugging your plugin](#debugging-your-plugin)
