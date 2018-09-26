@@ -1,14 +1,19 @@
+[![CircleCI](https://circleci.com/gh/amphro/streamer/tree/master.svg?style=shield)](https://circleci.com/gh/amphro/streamer/tree/master)
+[![Downloads/week](https://img.shields.io/npm/dw/@amphro/streamer.svg)](https://npmjs.org/package/@amphro/streamer)
+
 streamer
 ==============
 
 Stream platform or streaming events to the console via a channel.
 
-[![CircleCI](https://circleci.com/gh/amphro/streamer/tree/master.svg?style=shield)](https://circleci.com/gh/amphro/streamer/tree/master)
-[![Downloads/week](https://img.shields.io/npm/dw/@amphro/streamer.svg)](https://npmjs.org/package/@amphro/streamer)
+This plugin was build as part of a Dreamforce'18 talk. Here are the [slides](https://github.com/amphro/streamer/blob/master/Build_and_Release_a_CLI_Plugin_LIVE!.pdf) and the recording will be linked here when posted.
+
+
 
 <!-- toc -->
 
 <!-- tocstop -->
+
 <!-- install -->
 ```sh-session
 $ sfdx plugin:install @amphro/streamer

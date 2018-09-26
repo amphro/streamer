@@ -247,7 +247,6 @@
       }
     },
     "@salesforce/command": {
-      "version": "0.2.4",
       "requires": {
         "@oclif/command": "^1.5.0",
         "@oclif/errors": "^1.2.0",
