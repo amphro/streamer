@@ -46,5 +46,5 @@ EXAMPLE
   sfdx channel:stream /event/MyEvent__e -u de -r 20
 ```
 
-_See code: [src/commands/channel/stream.ts](https://github.com/amphro/streamer/blob/v1.0.0/src/commands/channel/stream.ts)_
+_See code: [src/commands/channel/stream.ts](https://github.com/amphro/streamer/blob/v1.0.1/src/commands/channel/stream.ts)_
 <!-- commandsstop -->
