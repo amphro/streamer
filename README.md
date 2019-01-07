@@ -6,7 +6,7 @@ streamer
 
 Stream platform or streaming events to the console via a channel.
 
-This plugin was build as part of a Dreamforce'18 talk. Here are the [slides](https://github.com/amphro/streamer/blob/master/Build_and_Release_a_CLI_Plugin_LIVE!.pdf) and the recording will be linked here when posted.
+This plugin was build as part of a Dreamforce'18 talk. Here are the [slides](https://github.com/amphro/streamer/blob/master/Build_and_Release_a_CLI_Plugin_LIVE!.pdf) and the [recording](https://www.youtube.com/watch?v=CnNxghMVW7c).
 
 
 
